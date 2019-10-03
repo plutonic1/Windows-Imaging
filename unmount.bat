@@ -1,0 +1,1 @@
+Dism /Unmount-Image /MountDir:"mount" /commit

@@ -1,0 +1,1 @@
+MakeWinPEMedia /ISO . WinPE_amd64.iso

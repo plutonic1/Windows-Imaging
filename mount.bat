@@ -1,0 +1,1 @@
+Dism /Mount-Image /ImageFile:"media\sources\boot.wim" /Index:1 /MountDir:"mount"
