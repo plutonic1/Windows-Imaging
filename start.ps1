@@ -14,11 +14,11 @@ function apply($type, $user){
         $window.Dispose()
     }else{
         Write-Host "Windows 10 Installation"
-        Write-Host ".$type."
-        Write-Host ".$user."
-        diskpart /s X:\diskpart.txt
-        imagex.exe /apply X:\image.wim 1 C:
-        bcdboot C:\Windows /l de-De /s S: /F ALL
+
+        Start-Process -Filepath diskpart -Wait -ArgumentList "/s D:\diskpart.txt"
+        Start-Process -Filepath imagex -Wait -ArgumentList "/apply D:\image.wim 1 C:"
+        Start-Process -Filepath bcdboot -Wait -ArgumentList "C:\Windows /l de-De /s S: /F ALL"
+        wpeutil reboot
     }
 }
 

@@ -1,0 +1,40 @@
+rem DISKPART script, put available space into C:
+rem ---------------------------------------------------
+rem Select Disk 0, wipe it empty, convert to GPT
+rem ---------------------------------------------------
+select disk 0
+clean
+convert gpt
+rem ---------------------------------------------------
+rem Create & format 100 MB EFI System partition 
+rem ---------------------------------------------------
+create partition efi size=100
+format quick fs=fat32 label="System"
+assign letter=s
+rem ---------------------------------------------------
+rem Create 16 MB MSR partition (will not be formatted)
+rem ---------------------------------------------------
+create partition msr size=16
+rem ---------------------------------------------------
+rem Create Windows partition using all available space
+rem ---------------------------------------------------
+create partition primary
+rem ---------------------------------------------------
+rem Shrink Windows partition to make space for WinRE 
+rem ---------------------------------------------------
+shrink minimum=450
+rem ---------------------------------------------------
+rem Format Windows partition, label it
+rem ---------------------------------------------------
+format quick fs=ntfs label="Windows"
+assign letter=c
+rem ---------------------------------------------------
+rem Create & format 450 MB recovery partition 
+rem ---------------------------------------------------
+create partition primary
+format quick fs=ntfs label="WinRE"
+set id="de94bba4-06d1-4d40-a16a-bfd50179d6ac"
+rem ---------------------------------------------------
+rem Exit Diskpart 
+rem ---------------------------------------------------
+exit

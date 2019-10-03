@@ -1,0 +1,1 @@
+dism /image:mount /set-inputlocale:de-de
