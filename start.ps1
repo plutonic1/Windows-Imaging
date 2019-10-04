@@ -68,4 +68,9 @@ $window.Controls.Add($txtUser)
 $window.Controls.Add($btnEFI)
 $window.Controls.Add($btnLegacy)
 
+$firmwaretype = (Get-ItemProperty -Path Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control -Name PEFirmwareType).PEFirmwareType
+
+if ($firmwaretype -eq 1) { $btnEFI.Enabled = $False }
+if ($firmwaretype -eq 2) { $btnLegacy.Enabled = $False }
+
 [void]$window.ShowDialog()
